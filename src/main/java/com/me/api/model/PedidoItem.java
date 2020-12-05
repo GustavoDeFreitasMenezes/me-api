@@ -1,6 +1,5 @@
 package com.me.api.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,7 @@ public class PedidoItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	private Integer quantidade;
 	
@@ -27,11 +26,11 @@ public class PedidoItem {
 	@JoinColumn(name = "item_id")
 	private Item itemId;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
