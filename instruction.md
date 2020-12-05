@@ -3,7 +3,12 @@ Este projeto foi criado com o STS 3.8.4
 Foi utilizado o banco de dados H2, 
 salvando num arquivo chamado meapi
 localizado em D:\curso\me-api
+maiores informacoes ver arquivo "application.properties"
 
 O projeto foi configurado para criar o database e popular as tabelas toda vez que iniciar o projeto no Spring
+
+Foi incorporado ao projeto o Swagger
+para documentar os resources da API
+está disponivel em http://localhost:8080/swagger-ui.html
 
 Os resources do projeto sao executados a partir do contexto: http://localhost:8080
