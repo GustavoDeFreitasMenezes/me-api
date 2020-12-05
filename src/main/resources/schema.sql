@@ -19,5 +19,7 @@ CREATE TABLE PEDIDO_ITEM(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	pedido_id INT NOT NULL,
 	item_id INT NOT NULL,
-	quantidade INT NOT NULL
+	quantidade INT NOT NULL,
+	FOREIGN KEY (item_id) REFERENCES item(id),
+	FOREIGN KEY (pedido_id) REFERENCES pedido(id)
 );

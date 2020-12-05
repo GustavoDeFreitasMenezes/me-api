@@ -15,13 +15,17 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository pr;
 	
-	public List<Pedido> listar(){
+	public List<Pedido> buscarTodos(){
 		return pr.findAll();
 	}
 	
-	public Pedido findById(Long id){
-		Pedido p = this.pr.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));	// se não encontrar retorna exceção
+	public Pedido buscarPorId(Long id){
+		Pedido p = pr.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));	// se não encontrar retorna exceção
 		return p;
+	}
+	
+	public void deletar(Long id){
+		pr.deleteById(id);
 	}
 	
 }

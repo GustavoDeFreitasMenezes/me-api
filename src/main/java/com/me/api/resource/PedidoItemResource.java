@@ -3,10 +3,13 @@ package com.me.api.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.me.api.model.PedidoItem;
@@ -20,14 +23,20 @@ public class PedidoItemResource {
 	private PedidoItemService pis;
 	
 	@GetMapping
-	public List<PedidoItem> listar() {
-		return pis.listar();		
+	public List<PedidoItem> buscarTodos() {
+		return pis.buscarTodos();		
 	}
 	
 	@GetMapping("/{id}")	
-	public ResponseEntity<PedidoItem> findById(@PathVariable Long id){
-		PedidoItem pi = pis.findById(id);
+	public ResponseEntity<PedidoItem> buscarPorId(@PathVariable Long id){
+		PedidoItem pi = pis.buscarPorId(id);
 		return pi != null ? ResponseEntity.ok(pi) : ResponseEntity.noContent().build();	// se nao tiver registro devolvo 404
+	}
+	
+	@DeleteMapping("{id}")	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deletar(@PathVariable Long id){
+		pis.deletar(id);
 	}
 	
 }
