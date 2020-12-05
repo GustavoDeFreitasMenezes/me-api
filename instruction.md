@@ -5,3 +5,5 @@ salvando num arquivo chamado meapi
 localizado em D:\curso\me-api
 
 O projeto foi configurado para criar o database e popular as tabelas toda vez que iniciar o projeto no Spring
+
+Os resources do projeto sao executados a partir do contexto: http://localhost:8080

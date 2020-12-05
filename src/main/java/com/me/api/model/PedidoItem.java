@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,11 +20,11 @@ public class PedidoItem {
 	private Integer quantidade;
 	
 	@ManyToOne
-	@Column(name = "pedido_id")
+	@JoinColumn(name = "pedido_id")
 	private Pedido pedidoId;
 	
 	@ManyToOne
-	@Column(name = "item_id")
+	@JoinColumn(name = "item_id")
 	private Item itemId;
 
 	public Integer getId() {
