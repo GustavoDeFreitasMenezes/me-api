@@ -15,17 +15,21 @@ public class ItemService {
 	@Autowired
 	private ItemRepository ir;
 	
-	public List<Item> buscarTodos(){
+	public List<Item> encontrarTodos(){
 		return ir.findAll();
 	}
 	
-	public Item buscarPorId(Long id){
+	public Item encontrarPorId(Long id){
 		Item i = ir.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));	// se não encontrar retorna exceção
 		return i;
 	}
 	
-	public void deletar(Long id){
+	public void excluir(Long id){
 		ir.deleteById(id);
+	}
+	
+	public Item salvar(Item i){
+		return ir.save(i);
 	}
 	
 }
