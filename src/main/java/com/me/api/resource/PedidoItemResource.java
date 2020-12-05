@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.me.api.model.Pedido;
 import com.me.api.model.PedidoItem;
 import com.me.api.service.PedidoItemService;
 
@@ -58,6 +60,12 @@ public class PedidoItemResource {
 		response.setHeader("Location", uri.toASCIIString());
 		
 		return ResponseEntity.created(uri).body(pi);	// devolvendo o objeto criado no body
+	}
+	
+	@PutMapping("{id}")	
+	public ResponseEntity<PedidoItem> atualizar(@PathVariable Long id, @RequestBody PedidoItem pedidoItem){
+		PedidoItem pi = pis.atualizar(id, pedidoItem);		
+		return ResponseEntity.ok(pi);
 	}
 	
 }

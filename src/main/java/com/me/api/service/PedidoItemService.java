@@ -2,6 +2,7 @@ package com.me.api.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class PedidoItemService {
 	}
 	
 	public PedidoItem salvar(PedidoItem pi){
+		return pir.save(pi);
+	}
+	
+	public PedidoItem atualizar(Long id, PedidoItem pedidoItem){
+		PedidoItem pi = encontrarPorId(id);				// consultando registro no BD 		
+		BeanUtils.copyProperties(pedidoItem, pi, "id");	// pegando as propriedades do front-end e setando no registro q veio do BD
 		return pir.save(pi);
 	}
 	

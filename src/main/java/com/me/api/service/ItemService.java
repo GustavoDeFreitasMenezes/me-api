@@ -2,6 +2,7 @@ package com.me.api.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class ItemService {
 	}
 	
 	public Item salvar(Item i){
+		return ir.save(i);
+	}
+	
+	public Item atualizar(Long id, Item item){
+		Item i = encontrarPorId(id);				// consultando registro no BD 		
+		BeanUtils.copyProperties(item, i, "id");	// pegando as propriedades do front-end e setando no registro q veio do BD
 		return ir.save(i);
 	}
 	

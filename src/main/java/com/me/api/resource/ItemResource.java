@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -58,6 +59,12 @@ public class ItemResource {
 		response.setHeader("Location", uri.toASCIIString());
 		
 		return ResponseEntity.created(uri).body(i);	// devolvendo o objeto criado no body
+	}
+	
+	@PutMapping("{id}")	
+	public ResponseEntity<Item> atualizar(@PathVariable Long id, @RequestBody Item item){
+		Item i = is.atualizar(id, item);		
+		return ResponseEntity.ok(i);
 	}
 	
 }
