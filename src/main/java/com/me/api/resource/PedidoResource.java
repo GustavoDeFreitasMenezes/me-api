@@ -28,8 +28,8 @@ public class PedidoResource {
 
 	@Autowired
 	private PedidoService ps;
-	
-	@GetMapping
+		
+	@GetMapping	
 	public List<Pedido> encontrarTodos() {
 		return ps.encontrarTodos();		
 	}
@@ -40,13 +40,13 @@ public class PedidoResource {
 		return p != null ? ResponseEntity.ok(p) : ResponseEntity.noContent().build();	// se nao tiver registro devolvo 404
 	}
 	
-	@DeleteMapping("{id}")	
+	@DeleteMapping("/{id}")	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long id){
 		ps.excluir(id);
 	}
 	
-	@PostMapping
+	@PostMapping	
 	public ResponseEntity<Pedido> salvar(@RequestBody Pedido pedido, HttpServletResponse response) {
 		Pedido p = ps.salvar(pedido);
 		
@@ -61,7 +61,7 @@ public class PedidoResource {
 		return ResponseEntity.created(uri).body(p);	// devolvendo o objeto criado no body
 	}
 	
-	@PutMapping("{id}")	
+	@PutMapping("/{id}")	
 	public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido pedido){
 		Pedido p = ps.atualizar(id, pedido);		
 		return ResponseEntity.ok(p);
