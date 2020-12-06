@@ -8,5 +8,6 @@ public interface PedidoRepositoryQuery {
 
 	public List<Pedido> pesquisarTodos();
 	public Pedido pesquisarPorId(Long id);
+	public void excluir(Long id);
 	
 }

@@ -37,7 +37,8 @@ public class PedidoService {
 	}
 	
 	public void excluir(Long id){
-		pr.deleteById(id);
+		//pr.deleteById(id);
+		pr.excluir(id);
 	}
 	
 	public Pedido salvar(Pedido pedido){

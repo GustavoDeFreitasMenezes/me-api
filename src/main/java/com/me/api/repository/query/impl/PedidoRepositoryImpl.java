@@ -2,20 +2,16 @@ package com.me.api.repository.query.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.me.api.model.Pedido;
 import com.me.api.model.PedidoItem;
+import com.me.api.repository.ItemRepository;
 import com.me.api.repository.PedidoItemRepository;
 import com.me.api.repository.PedidoRepository;
 import com.me.api.repository.query.PedidoRepositoryQuery;
@@ -27,6 +23,8 @@ public class PedidoRepositoryImpl implements PedidoRepositoryQuery{
 	
 	@Autowired
 	private PedidoRepository pr;
+	@Autowired
+	private ItemRepository ir;
 	@Autowired
 	private PedidoItemRepository pir;
 	
@@ -64,6 +62,24 @@ public class PedidoRepositoryImpl implements PedidoRepositoryQuery{
 		}
 		
 		return p;
+	}
+	
+	public void excluir(Long id) {
+		
+		// consultando todos os pedido_item
+		List<PedidoItem> lpi = pir.pesquisarTodosPorPedidoId(id);
+		for (PedidoItem pi : lpi) {
+			
+			// excluindo pedido_item
+			pir.deleteById(pi.getId());			
+			
+			// excluindo item
+			ir.deleteById(pi.getItemId().getId());
+		}
+		
+		// excluindo pedido
+		pr.deleteById(id);
+		
 	}
 
 	
