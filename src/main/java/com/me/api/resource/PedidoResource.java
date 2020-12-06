@@ -34,19 +34,19 @@ public class PedidoResource {
 		return ps.encontrarTodos();		
 	}
 	
-	@GetMapping("/{id}")	
+	@GetMapping("/{id}")	//@GetMapping("/pedido/{id}")	
 	public ResponseEntity<Pedido> encontrarPorId(@PathVariable Long id){
 		Pedido p = ps.encontrarPorId(id);
 		return p != null ? ResponseEntity.ok(p) : ResponseEntity.noContent().build();	// se nao tiver registro devolvo 404
 	}
 	
-	@DeleteMapping("/{id}")	
+	@DeleteMapping("/{id}")		//@DeleteMapping("/pedido/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long id){
 		ps.excluir(id);
 	}
 	
-	@PostMapping	
+	@PostMapping	//@PostMapping("/pedido")
 	public ResponseEntity<Pedido> salvar(@RequestBody Pedido pedido, HttpServletResponse response) {
 		Pedido p = ps.salvar(pedido);
 		
@@ -61,7 +61,7 @@ public class PedidoResource {
 		return ResponseEntity.created(uri).body(p);	// devolvendo o objeto criado no body
 	}
 	
-	@PutMapping("/{id}")	
+	@PutMapping("/{id}")	//@PutMapping("/pedido/{id}")
 	public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido pedido){
 		Pedido p = ps.atualizar(id, pedido);		
 		return ResponseEntity.ok(p);

@@ -1,5 +1,6 @@
 package com.me.api.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -39,12 +40,36 @@ public class PedidoService {
 	
 	public Pedido salvar(Pedido pedido){
 		
+		// verificando os valores de itens e preco do pedido
+		if(!StringUtils.isEmpty(pedido.getItens())) {
+			Integer qtde = 0;
+			BigDecimal precoUnit = BigDecimal.valueOf(0);
+			BigDecimal precoTotal = BigDecimal.valueOf(0);
+			
+			Integer itensAprovados = 0;
+			BigDecimal valorAprovado = BigDecimal.valueOf(0);
+			
+			for (Item item : pedido.getItens()) {
+				qtde = item.getQuantidade();
+				precoUnit = item.getPrecoUnitario();
+				precoTotal = precoUnit.multiply(BigDecimal.valueOf(qtde));
+				
+				itensAprovados += qtde;
+				valorAprovado = valorAprovado.add(precoTotal);
+			}
+			
+			pedido.setItensAprovados(itensAprovados);
+			pedido.setValorAprovado(valorAprovado);
+		}
+		
+		// salvando pedido
 		Pedido p = pr.save(pedido);
 		
 		if(!StringUtils.isEmpty(p.getItens())) {
-			
-			// salvando item
-			for (Item item : p.getItens()) {				
+						
+			for (Item item : p.getItens()) {
+				
+				// salvando item
 				Item i = is.salvar(item);
 				
 				// salvando pedido item
