@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-public class StatusPedido {
+public class StatusPedidoResposta {
 
 	private String pedido;
 	private List<StatusPedidoEnum> status;

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.me.api.model.Pedido;
-import com.me.api.model.transiente.StatusPedido;
+import com.me.api.model.StatusPedido;
+import com.me.api.model.transiente.StatusPedidoResposta;
 import com.me.api.service.StatusPedidoService;
 
 @RestController
@@ -19,8 +19,8 @@ public class StatusPedidoResource {
 	private StatusPedidoService sps;
 
 	@PostMapping
-	public ResponseEntity<StatusPedido> encontrar(@RequestBody Pedido pedido){
-		StatusPedido sp = sps.encontrar(pedido);
+	public ResponseEntity<StatusPedidoResposta> verificarStatusPedido(@RequestBody StatusPedido statusPedido){
+		StatusPedidoResposta sp = sps.verificarStatusPedido(statusPedido);
 		return sp != null ? ResponseEntity.ok(sp) : ResponseEntity.noContent().build();	// se nao tiver registro devolvo 404
 	}
 	
