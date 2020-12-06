@@ -6,4 +6,6 @@ import com.me.api.model.Pedido;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
+	public Pedido findByPedido(String pedido);
+	
 }

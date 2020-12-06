@@ -6,4 +6,6 @@ import com.me.api.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long>{
 
+	public Item findByDescricao(String descricao);
+	
 }

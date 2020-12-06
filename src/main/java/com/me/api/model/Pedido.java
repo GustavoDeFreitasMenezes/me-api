@@ -1,12 +1,15 @@
 package com.me.api.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -22,6 +25,9 @@ public class Pedido {
 	
 	@Column(name = "valor_aprovado")
 	private BigDecimal valorAprovado;
+	
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    //private List<PedidoItem> itens;
 	
 	public Long getId() {
 		return id;
