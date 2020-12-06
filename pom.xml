@@ -20,6 +20,14 @@
 
 	<dependencies>
 	
+		<!-- Lombok para gerar get e set nos pojos -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.16.18</version>
+		    <scope>provided</scope>
+		</dependency>
+	
 		<!-- Swagger -->
 		<dependency>
 		    <groupId>io.springfox</groupId>

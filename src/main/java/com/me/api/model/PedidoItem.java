@@ -8,8 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "pedido_item")
+@Data @NoArgsConstructor @AllArgsConstructor
 public class PedidoItem {
 
 	@Id
@@ -24,39 +29,7 @@ public class PedidoItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "item_id")
-	private Item itemId;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public Pedido getPedidoId() {
-		return pedidoId;
-	}
-
-	public void setPedidoId(Pedido pedidoId) {
-		this.pedidoId = pedidoId;
-	}
-
-	public Item getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(Item itemId) {
-		this.itemId = itemId;
-	}
+	private Item itemId;	
 
 	@Override
 	public int hashCode() {

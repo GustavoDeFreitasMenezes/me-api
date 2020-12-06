@@ -3,15 +3,21 @@ package com.me.api.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Pedido {
 
 	@Id
@@ -27,39 +33,9 @@ public class Pedido {
 	private BigDecimal valorAprovado;
 	
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
-    //private List<PedidoItem> itens;
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getPedido() {
-		return pedido;
-	}
-	
-	public void setPedido(String pedido) {
-		this.pedido = pedido;
-	}
-	
-	public Integer getItensAprovados() {
-		return itensAprovados;
-	}
-	
-	public void setItensAprovados(Integer itensAprovados) {
-		this.itensAprovados = itensAprovados;
-	}
-	
-	public BigDecimal getValorAprovado() {
-		return valorAprovado;
-	}
-	
-	public void setValorAprovado(BigDecimal valorAprovado) {
-		this.valorAprovado = valorAprovado;
-	}
+    @Transient
+    @JsonProperty("itens")
+	private List<Item> itens;		
 	
 	@Override
 	public int hashCode() {

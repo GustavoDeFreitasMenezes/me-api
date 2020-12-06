@@ -7,9 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Item {
 
 	@Id
@@ -20,31 +27,11 @@ public class Item {
 	
 	@Column(name = "preco_unitario")
 	private BigDecimal precoUnitario;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public BigDecimal getPrecoUnitario() {
-		return precoUnitario;
-	}
-
-	public void setPrecoUnitario(BigDecimal precoUnitario) {
-		this.precoUnitario = precoUnitario;
-	}
-
+	
+	@Transient
+	@JsonProperty("qtd")
+	private Integer quantidade;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

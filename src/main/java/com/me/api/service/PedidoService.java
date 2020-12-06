@@ -6,8 +6,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.me.api.model.Item;
 import com.me.api.model.Pedido;
+import com.me.api.model.PedidoItem;
 import com.me.api.repository.PedidoRepository;
 
 @Service
@@ -15,6 +18,11 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository pr;
+	
+	@Autowired
+	private ItemService is;
+	@Autowired
+	private PedidoItemService pis;
 	
 	public List<Pedido> encontrarTodos(){
 		return pr.findAll();
@@ -29,8 +37,28 @@ public class PedidoService {
 		pr.deleteById(id);
 	}
 	
-	public Pedido salvar(Pedido p){
-		return pr.save(p);
+	public Pedido salvar(Pedido pedido){
+		
+		Pedido p = pr.save(pedido);
+		
+		if(!StringUtils.isEmpty(p.getItens())) {
+			
+			// salvando item
+			for (Item item : p.getItens()) {				
+				Item i = is.salvar(item);
+				
+				// salvando pedido item
+				PedidoItem pi = new PedidoItem();
+				pi.setPedidoId(p);
+				pi.setItemId(i);
+				pi.setQuantidade(i.getQuantidade());
+				pis.salvar(pi);
+				
+			}
+			
+		}
+		
+		return p;
 	}
 	
 	public Pedido atualizar(Long id, Pedido pedido){
