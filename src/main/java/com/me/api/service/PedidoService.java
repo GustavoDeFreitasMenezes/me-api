@@ -26,11 +26,13 @@ public class PedidoService {
 	private PedidoItemService pis;
 	
 	public List<Pedido> encontrarTodos(){
-		return pr.findAll();
+		//return pr.findAll();
+		return pr.pesquisarTodos();
 	}
 	
 	public Pedido encontrarPorId(Long id){
-		Pedido p = pr.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));	// se não encontrar retorna exceção
+		//Pedido p = pr.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));	// se não encontrar retorna exceção
+		Pedido p = pr.pesquisarPorId(id);
 		return p;
 	}
 	
